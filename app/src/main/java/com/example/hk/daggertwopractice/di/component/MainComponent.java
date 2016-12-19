@@ -1,6 +1,7 @@
 package com.example.hk.daggertwopractice.di.component;
 
 import com.example.hk.daggertwopractice.di.module.MainModule;
+import com.example.hk.daggertwopractice.di.module.PoetryModule;
 import com.example.hk.daggertwopractice.view.MainActivity;
 
 import dagger.Component;
@@ -10,9 +11,9 @@ import dagger.Component;
  * Email: kaihu1989@gmail.com.
  */
 
-//用@Component表示这个接口是一个连接器，能用@Component注解的只
-//能是interface或者抽象类
-@Component(modules = MainModule.class)
+//用@Component表示这个接口是一个连接器，能用@Component注解的只能是interface或者抽象类
+//这里表示Component会从MainModule,PoetryModule类中拿那些用@Provides注解的方法来生成需要注入的实例
+@Component(modules = {MainModule.class, PoetryModule.class})
 public interface MainComponent {
 
     /**
