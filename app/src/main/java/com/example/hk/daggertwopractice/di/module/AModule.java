@@ -1,6 +1,7 @@
 package com.example.hk.daggertwopractice.di.module;
 
 import com.example.hk.daggertwopractice.di.annotation.AScope;
+import com.example.hk.daggertwopractice.di.annotation.PoetryQualifier;
 import com.example.hk.daggertwopractice.model.Poetry;
 
 import dagger.Module;
@@ -13,9 +14,18 @@ import dagger.Provides;
 
 @Module
 public class AModule {
+
+    @PoetryQualifier("A")
     @AScope
     @Provides
     public Poetry getPoetry(){
         return new Poetry("万物美好");
+    }
+
+    @PoetryQualifier("B")
+    @AScope
+    @Provides
+    public Poetry getOtherPoetry(){
+        return new Poetry("另外一首诗");
     }
 }

@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.example.hk.daggertwopractice.MainApplication;
 import com.example.hk.daggertwopractice.R;
+import com.example.hk.daggertwopractice.di.annotation.PoetryQualifier;
 import com.example.hk.daggertwopractice.model.Poetry;
 import com.google.gson.Gson;
 
@@ -21,8 +22,15 @@ public class AActivity extends AppCompatActivity{
     @Inject
     Gson mGson;
 
+    // 匹配Module中同样注解的方法
+    @PoetryQualifier("A")
     @Inject
     Poetry mPoetry;
+
+    // 匹配Module中同样注解的方法
+    @PoetryQualifier("B")
+    @Inject
+    Poetry mPoetryB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +42,9 @@ public class AActivity extends AppCompatActivity{
                 .inject(this);
 
         mTextView = (TextView) findViewById(R.id.text);
-        String text = mPoetry.getPemo()+",mPoetry:"+mPoetry+(mGson == null ? "Gson没被注入" : "Gson已经被注入");
+        String text = mPoetry.getPemo()+",mPoetryA:"+mPoetry+
+                mPoetryB.getPemo()+",mPoetryB:"+mPoetryB+
+                (mGson == null ? "Gson没被注入" : "Gson已经被注入");
         mTextView.setText(text);
     }
 }
