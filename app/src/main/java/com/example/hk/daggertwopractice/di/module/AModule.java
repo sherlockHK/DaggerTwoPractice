@@ -4,6 +4,8 @@ import com.example.hk.daggertwopractice.di.annotation.AScope;
 import com.example.hk.daggertwopractice.di.annotation.PoetryQualifier;
 import com.example.hk.daggertwopractice.model.Poetry;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -27,5 +29,12 @@ public class AModule {
     @Provides
     public Poetry getOtherPoetry(){
         return new Poetry("另外一首诗");
+    }
+
+    @Named("C")
+    @AScope
+    @Provides
+    public Poetry getNamedPoetry(){
+        return new Poetry("Dagger2默认实现了Qualifier：@Named");
     }
 }

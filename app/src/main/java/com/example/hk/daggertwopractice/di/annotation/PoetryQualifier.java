@@ -12,6 +12,7 @@ import javax.inject.Qualifier;
  */
 
 //@Qualifier用来区别，当注入同一实例时，在module中有多个注入方法
+//而Dagger2已经默认帮我们实现了一个@Named:
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

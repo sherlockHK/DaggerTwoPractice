@@ -11,6 +11,7 @@ import com.example.hk.daggertwopractice.model.Poetry;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by HK on 2016/12/19.
@@ -32,6 +33,10 @@ public class AActivity extends AppCompatActivity{
     @Inject
     Poetry mPoetryB;
 
+    @Named("C")
+    @Inject
+    Poetry mPoetryC;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +47,9 @@ public class AActivity extends AppCompatActivity{
                 .inject(this);
 
         mTextView = (TextView) findViewById(R.id.text);
-        String text = mPoetry.getPemo()+",mPoetryA:"+mPoetry+
-                mPoetryB.getPemo()+",mPoetryB:"+mPoetryB+
+        String text = mPoetry.getPemo()+",mPoetryA:"+mPoetry+ "\n" +
+                mPoetryB.getPemo()+",mPoetryB:"+mPoetryB+ "\n" +
+                mPoetryC.getPemo()+",mPoetryC:"+mPoetryC+"\n"+
                 (mGson == null ? "Gson没被注入" : "Gson已经被注入");
         mTextView.setText(text);
     }
