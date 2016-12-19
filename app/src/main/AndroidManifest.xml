@@ -3,6 +3,7 @@
     package="com.example.hk.daggertwopractice">
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,6 +18,8 @@
         </activity>
 
         <activity android:name=".view.OtherActivity" />
+
+        <activity android:name=".view.AActivity" />
     </application>
 
 </manifest>

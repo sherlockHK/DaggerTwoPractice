@@ -1,5 +1,6 @@
 package com.example.hk.daggertwopractice.di.component;
 
+import com.example.hk.daggertwopractice.MainApplication;
 import com.example.hk.daggertwopractice.di.annotation.PoetryScope;
 import com.example.hk.daggertwopractice.di.module.MainModule;
 import com.example.hk.daggertwopractice.di.module.PoetryModule;
@@ -13,10 +14,10 @@ import dagger.Component;
  * Email: kaihu1989@gmail.com.
  */
 
-//用@Component表示这个接口是一个连接器，能用@Component注解的只能是interface或者抽象类
-//这里表示Component会从MainModule,PoetryModule类中拿那些用@Provides注解的方法来生成需要注入的实例
+//用@Component表示这个接口是一个连接器，能用@Component注解的只能是interface或者抽象类,这里表示Component会从MainModule,PoetryModule类中拿那些用@Provides注解的方法来生成需要注入的实例
+//dependencies用来获取ApplicationComponent中暴露出来的实例
 @PoetryScope
-@Component(modules = {MainModule.class, PoetryModule.class})
+@Component(dependencies = ApplicationComponent.class, modules = {MainModule.class, PoetryModule.class})
 public abstract class MainComponent {
 
     /**
@@ -30,9 +31,12 @@ public abstract class MainComponent {
     public abstract void inject(OtherActivity activity);
 
     private static MainComponent sComponent;
-    public static MainComponent getInstance(){
-        if (sComponent == null){
-            sComponent = DaggerMainComponent.builder().build();
+
+    public static MainComponent getInstance() {
+        if (sComponent == null) {
+            sComponent = DaggerMainComponent.builder()
+                    .applicationComponent(MainApplication.getInstance().getApplicationComponent())
+                    .build();
         }
         return sComponent;
     }
