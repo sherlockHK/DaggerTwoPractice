@@ -1,9 +1,7 @@
 package com.example.hk.daggertwopractice.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.hk.daggertwopractice.R;
@@ -13,8 +11,12 @@ import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by HK on 2016/12/19.
+ * Email: kaihu1989@gmail.com.
+ */
 
+public class OtherActivity extends AppCompatActivity {
     //添加@Inject注解，表示这个mPoetry是需要注入的
     @Inject
     Poetry mPoetry;
@@ -27,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_other);
 
-        // 使用Dagger2生成的类 生成组件进行构造，并注入
         MainComponent.getInstance()
                 .inject(this);
 
@@ -41,12 +42,5 @@ public class MainActivity extends AppCompatActivity {
         String json = mGson.toJson(mPoetry);
         String text = json + ",mPoetry:"+mPoetry;
         mTextView.setText(text);
-
-        findViewById(R.id.open).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, OtherActivity.class));
-            }
-        });
     }
 }
